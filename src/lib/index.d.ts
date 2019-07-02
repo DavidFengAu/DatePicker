@@ -50,7 +50,7 @@ export interface IDateRangePickerProps {
   showClearAll?: boolean | undefined
 }
 
-declare class DateRangePicker extends React.Component<IDateRangePickerProps> {
+export declare class DateRangePicker extends React.Component<IDateRangePickerProps> {
   onChange(startDate?: moment.Moment | undefined, endDate?: moment.Moment | undefined): void
   onChangeStartDate(startDate: moment.Moment): void
   onChangeEndDate(endDate: moment.Moment): void

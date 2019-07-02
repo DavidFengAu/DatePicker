@@ -31,7 +31,7 @@ class DatePicker extends Component {
     const preDate = prevProps.selected
     const thisDate = this.props.selected
     if ((!moment.isMoment(preDate && thisDate) && moment.isMoment(thisDate || preDate))
-      || (preDate && thisDate && !preDate.isSame(thisDate, 'day'))) {
+      || (preDate && thisDate && !preDate.isSame(thisDate, 'date'))) {
       this.setState({
         value: thisDate ? thisDate.format('DD/MM/YYYY') : ''
       })
@@ -40,15 +40,15 @@ class DatePicker extends Component {
 
   isInRange = (date) => {
     return date === null || date === undefined || (
-      (!this.props.minDate || date.isSameOrAfter(this.props.minDate))
-      && (!this.props.maxDate || date.isSameOrBefore(this.props.maxDate))
+      (!this.props.minDate || date.isSameOrAfter(this.props.minDate, 'date'))
+      && (!this.props.maxDate || date.isSameOrBefore(this.props.maxDate, 'date'))
     )
   }
 
   onChange = (date) => {
     const checkedDate = this.isInRange(date) ? date : this.props.selected
     if (checkedDate === null || this.props.selected === null
-      || (checkedDate && !checkedDate.isSame(this.props.selected))) {
+      || (checkedDate && !checkedDate.isSame(this.props.selected, 'date'))) {
       this.props.onChange(date)
     }
     this.setState({ value: checkedDate ? checkedDate.format('DD/MM/YYYY') : '' })
