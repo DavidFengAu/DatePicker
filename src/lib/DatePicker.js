@@ -47,7 +47,7 @@ class DatePicker extends Component {
 
   onChange = (date) => {
     const checkedDate = this.isInRange(date) ? date : this.props.selected
-    if (checkedDate === null || this.props.selected === null
+    if (checkedDate === null || this.props.selected === null || this.props.selected === undefined
       || (checkedDate && !checkedDate.isSame(this.props.selected, 'date'))) {
       this.props.onChange(date)
     }
