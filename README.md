@@ -1,11 +1,11 @@
-# @bgl/date-picker
+# @davidfengau/date-picker
 
 React Date Picker initially built for use in BGL SF360.
 
 ## Installation and usage
 
 ```
-yarn add @bgl/date-picker
+yarn add @davidfengau/date-picker
 ```
 
 Then use it in your app:
@@ -13,7 +13,7 @@ Then use it in your app:
 ```js
 import React from 'react'
 import moment from 'moment'
-import DatePicker from '@bigdata/date-picker'
+import DatePicker from '@davidfengau/date-picker'
 
 class App extends React.Component {
   constructor(props) {
@@ -44,7 +44,7 @@ class App extends React.Component {
 
 Use Date Range Picker:
 ```js
-import { DateRangePicker } from '@bigdata/date-picker'
+import { DateRangePicker } from '@davidfengau/date-picker'
 ```
 
 ## Props
@@ -63,10 +63,14 @@ Common props you may want to specify include:
 
 Extra props for date range picker:
 
+- `onChange` - subscribe to date change
 - `selectsStart` - boolean
 - `selectsEnd` - boolean
 - `startDate` - moment
 - `endDate` - moment
+- `startDatePlaceholder` - string
+- `endDatePlaceholder` - string
+- `showClearAll` - boolean
 
 ## Development
 ```js
@@ -76,5 +80,9 @@ yarn run build
 
 ## Publish
 ```js
+# For public npm
+npm publish --access public
+
+# For BGL only
 npm publish --registry http://repo.bglcorp.com.au:8081/content/repositories/bgl.npm/
 ```

@@ -10,7 +10,7 @@ import { currentFinancialYear, transformDate } from './Utils'
 class DatePicker extends Component {
   static propTypes = {
     onChange: PropTypes.func.isRequired,
-    selected: PropTypes.bool,
+    selected: PropTypes.instanceOf(moment),
     tabIndex: PropTypes.number,
     className: PropTypes.string,
     minDate: PropTypes.instanceOf(moment),
