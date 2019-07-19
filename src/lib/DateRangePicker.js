@@ -1,19 +1,21 @@
 import moment from 'moment'
 import React from 'react'
 import PropTypes from 'prop-types'
+import MomentPropTypes from 'react-moment-proptypes'
 import Fund from './Fund'
 import DatePicker from './DatePicker'
-import { currentFinancialYear } from './Utils'
 
 class DateRangePicker extends React.Component {
   static propTypes = {
     onChange: PropTypes.func.isRequired,
-    fund: PropTypes.instanceOf(Fund),
-    startDate: PropTypes.instanceOf(moment),
-    endDate: PropTypes.instanceOf(moment),
+    startDate: MomentPropTypes.momentObj,
+    endDate: MomentPropTypes.momentObj,
     startDatePlaceholder: PropTypes.string,
     endDatePlaceholder: PropTypes.string,
-    showClearAll: PropTypes.bool
+    showClearAll: PropTypes.bool,
+    fundFYStartDate: MomentPropTypes.momentObj,
+    fundFYEndDate: MomentPropTypes.momentObj,
+    fundFormedDate: MomentPropTypes.momentObj
   }
 
   onChange = (startDate, endDate) => {
@@ -40,36 +42,18 @@ class DateRangePicker extends React.Component {
     this.datePickerEnd.datePicker.handleCalendarClickOutside()
   }
 
-  datePeriodWithFundFY = (fund) => {
-    const fy = fund.financialYear()
-    return [
-      <div key="currentFY" onClick={() => this.setDatesByFY(fund.startDate(), fund.endDate())}>
-        Current Fund FY
-      </div>,
-      <div key="nextFY" onClick={() => this.setDatesByFY(moment(`${fy}-07-01`), moment(`${fy + 1}-06-30`))}>
-        Next Fund FY
-      </div>
-    ]
-  }
-
-  datePeriodWithCurrentFY = () => {
-    const fy = currentFinancialYear
-    return [
-      <div key="currentFY" onClick={() => this.setDatesByFY(moment(`${fy - 2}-07-01`), moment(`${fy - 1}-06-30`))}>
-        Previous Financial Year
-      </div>,
-      <div key="nextFY" onClick={() => this.setDatesByFY(moment(`${fy - 1}-07-01`), moment(`${fy}-06-30`))}>
-        Current Financial Year
-      </div>
-    ]
-  }
-
   datePeriodOptions = () => {
+    const fund = new Fund(this.props.fundFYStartDate, this.props.fundFYEndDate, this.props.fundFormedDate)
+    const fy = fund.financialYear()
     return (
       <div className="datePeriodOptions">
-        {this.props.fund ? this.datePeriodWithFundFY(this.props.fund) : this.datePeriodWithCurrentFY()}
-        {this.props.showClearAll
-          ? <div className="clearAll" onClick={() => this.onClearDate()}>Clear Dates</div> : null}
+        <div key="currentFY" onClick={() => this.setDatesByFY(fund.startDate(), fund.endDate())}>
+          {fund.isEmpty() ? 'Current Financial Year' : 'Current Fund FY'}
+        </div>
+        <div key="nextFY" onClick={() => this.setDatesByFY(moment(`${fy}-07-01`), moment(`${fy + 1}-06-30`))}>
+          {fund.isEmpty() ? 'Next Financial Year' : 'Next Fund FY'}
+        </div>
+        {this.props.showClearAll ? <div className="clearAll" onClick={this.onClearDate}>Clear Dates</div> : null}
       </div>
     )
   }

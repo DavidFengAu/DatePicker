@@ -1,12 +1,6 @@
 import * as moment from 'moment'
 import * as React from 'react'
 
-export declare class Fund {
-  fyStartDate?: moment.Moment
-  fyEndDate?: moment.Moment
-  formedDate?: moment.Moment
-}
-
 declare function transformDate(value: string): moment.Moment | null
 
 declare function calcFinancialYear(date: moment.Moment): number
@@ -40,14 +34,16 @@ export default DatePicker
 
 export interface IDateRangePickerProps {
   onChange: (dateRange: { startDate: moment.Moment | undefined, endDate: moment.Moment | undefined }) => void,
-  fund?: Fund | undefined,
   selectsStart?: boolean | undefined,
   selectsEnd?: boolean | undefined,
   startDate?: moment.Moment | undefined,
   endDate?: moment.Moment | undefined,
   startDatePlaceholder?: string | undefined,
   endDatePlaceholder?: string | undefined,
-  showClearAll?: boolean | undefined
+  showClearAll?: boolean | undefined,
+  fundFYStartDate?: moment.Moment | undefined,
+  fundFYEndDate?: moment.Moment | undefined,
+  fundFormedDate?: moment.Moment | undefined
 }
 
 export declare class DateRangePicker extends React.Component<IDateRangePickerProps> {

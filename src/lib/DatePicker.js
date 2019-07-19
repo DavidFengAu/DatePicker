@@ -1,6 +1,7 @@
 import moment from 'moment'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import MomentPropTypes from 'react-moment-proptypes'
 import ReactDatePicker from 'react-datepicker'
 import { E_KEY, ENTER_KEY, F_KEY, H_KEY, HOME_BACKWARD_KEY, HOME_FORWARD_KEY, K_KEY, L_KEY, M_KEY, MINUS_KEY,
   MINUS_KEY_2, MINUS_KEY_3, PAGE_DOWN_KEY, PAGE_UP_KEY, PLUS_KEY, PLUS_KEY_2, PLUS_KEY_3, R_KEY, T_KEY, W_KEY,
@@ -10,11 +11,11 @@ import { currentFinancialYear, transformDate } from './Utils'
 class DatePicker extends Component {
   static propTypes = {
     onChange: PropTypes.func.isRequired,
-    selected: PropTypes.instanceOf(moment),
+    selected: MomentPropTypes.momentObj,
     tabIndex: PropTypes.number,
     className: PropTypes.string,
-    minDate: PropTypes.instanceOf(moment),
-    maxDate: PropTypes.instanceOf(moment),
+    minDate: MomentPropTypes.momentObj,
+    maxDate: MomentPropTypes.momentObj,
     placeholderText: PropTypes.string,
     allowSameDay: PropTypes.bool,
     showYearDropdown: PropTypes.bool

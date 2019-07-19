@@ -1,4 +1,10 @@
-# @bgl/date-picker
+# @davidfengau/date-picker
+
+## 1.0.9, 1.0.8, 1.0.7
+- hot fix: selected type error
+
+## 1.0.6
+- remove Fund from date range picker and replace with FundFYStartDate, FundFYEndDate, FundFormedDate
 
 ## 1.0.5
 - hot fix: selected type error
