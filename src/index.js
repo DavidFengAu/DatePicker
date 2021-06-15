@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import moment from 'moment'
 import DatePicker from './lib'
 
@@ -28,4 +29,4 @@ class App extends React.Component {
     }
 }
 
-render(<App />, document.getElementById("root"))
+ReactDOM.render(<App />, document.getElementById("root"))

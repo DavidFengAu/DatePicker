@@ -28,15 +28,11 @@ class DatePicker extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    const preDate = prevProps.selected
-    const thisDate = this.props.selected
-    if ((!moment.isMoment(preDate && thisDate) && moment.isMoment(thisDate || preDate))
-      || (preDate && thisDate && !preDate.isSame(thisDate, 'date'))) {
-      this.setState({
-        value: thisDate ? thisDate.format('DD/MM/YYYY') : ''
-      })
-    }
+  componentWillReceiveProps(nextProps) {
+    const nextDate = nextProps.selected
+    this.setState({
+      value: nextDate && moment.isMoment(nextDate) && nextDate.isValid() ? nextDate.format('DD/MM/YYYY') : ''
+    })
   }
 
   isInRange = (date) => {
@@ -62,6 +58,7 @@ class DatePicker extends Component {
   }
 
   onKeyDown = (event) => {
+    const selected = this.props.selected || undefined
     switch (event.keyCode) {
       case ENTER_KEY:
         // @ts-ignore
@@ -73,24 +70,24 @@ class DatePicker extends Component {
       case PLUS_KEY:
       case PLUS_KEY_2:
       case PLUS_KEY_3:
-        this.onChange(moment(this.props.selected).add(1, 'days'))
+        this.onChange(moment(selected).add(1, 'days'))
         break
       case MINUS_KEY:
       case MINUS_KEY_2:
       case MINUS_KEY_3:
-        this.onChange(moment(this.props.selected).subtract(1, 'days'))
+        this.onChange(moment(selected).subtract(1, 'days'))
         break
       case PAGE_DOWN_KEY:
-        this.onChange(moment(this.props.selected).add(1, 'months'))
+        this.onChange(moment(selected).add(1, 'months'))
         break
       case PAGE_UP_KEY:
-        this.onChange(moment(this.props.selected).subtract(1, 'months'))
+        this.onChange(moment(selected).subtract(1, 'months'))
         break
       case HOME_FORWARD_KEY:
-        this.onChange(moment(this.props.selected).add(1, 'years'))
+        this.onChange(moment(selected).add(1, 'years'))
         break
       case HOME_BACKWARD_KEY:
-        this.onChange(moment(this.props.selected).subtract(1, 'years'))
+        this.onChange(moment(selected).subtract(1, 'years'))
         break
       case F_KEY:
         this.onChange(moment(`${currentFinancialYear - 1}-07-01`))

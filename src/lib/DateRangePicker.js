@@ -48,10 +48,10 @@ class DateRangePicker extends React.Component {
     return (
       <div className="datePeriodOptions">
         <div key="currentFY" onClick={() => this.setDatesByFY(fund.startDate(), fund.endDate())}>
-          {fund.isEmpty() ? 'Current Financial Year' : 'Current Fund FY'}
+          {fund.isEmpty() ? 'Current Financial Year' : 'Current Entity FY'}
         </div>
         <div key="nextFY" onClick={() => this.setDatesByFY(moment(`${fy}-07-01`), moment(`${fy + 1}-06-30`))}>
-          {fund.isEmpty() ? 'Next Financial Year' : 'Next Fund FY'}
+          {fund.isEmpty() ? 'Next Financial Year' : 'Next Entity FY'}
         </div>
         {this.props.showClearAll ? <div className="clearAll" onClick={this.onClearDate}>Clear Dates</div> : null}
       </div>
